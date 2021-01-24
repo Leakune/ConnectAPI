@@ -1,69 +1,33 @@
-////
-////  MarketCoins.swift
-////  crypTOP
-////
-////  Created by Ludovic FAVIER on 16/01/2021.
-////
 //
-//import Foundation
+//  MarketCoins.swift
+//  crypTOP
 //
-//class MarketCoins {
+//  Created by Ludovic FAVIER on 16/01/2021.
 //
-//    var name: String //FROMSYMBOL
-//    var price: [String: Double] = [:] //TOSYMBOL + PRICE
-//    var srcImage: String //IMAGEURL
-//
-//
-//    init(json: [String: Any]) {
-//        guard let raw = json["RAW"] as? [String: Any],
-//            //BTC
-//            let btc = raw["BTC"] as? [String: Any],
-//                //EUR
-//                 let eur = btc["EUR"] as? [String: Any],
-//                    let name = eur["FROMSYMBOL"] as? String,
-//                        //self.name = name
-//                    let price = eur["PRICE"] as? Double,
-//                    let currency = eur["TOSYMBOL"] as? String,
-//                        //self.price[currency] = price
-//
-//                    if let imageUrl = eur["IMAGEURL"] as? String,
-//                        //self.srcImage = imageUrl
-//                //USD
-//                let usd = btc["USD"] as? [String: Any],
-//                    let priceUSD = usd["PRICE"] as? Double, let currency = usd["TOSYMBOL"] as? String
-//                        self.price[currency] = priceUSD
-//
-//            //ETH
-//            let eth = raw["ETH"] as? [String: Any]
-//                //EUR
-//                let eurEth = eth["USD"] as? [String: Any],
-//                    let nameEth = eurEth["FROMSYMBOL"] as? String,
-//                        //self.name = name
-//                    let price = eurEth["PRICE"] as? Double, let currency = eur["TOSYMBOL"] as? String
-//                        self.price[currency] = price
-//                    let imageUrl = eurEth["IMAGEURL"] as? String
-//                        self.srcImage = imageUrl
-//                //USD
-//                if let usd = eth["USD"] as? [String: Any] {
-//                    if let name = usd["FROMSYMBOL"] as? String{
-//                        self.name = name
-//                    }
-//                    if let price = usd["PRICE"] as? Double, let currency = usd["TOSYMBOL"] as? String{
-//                        self.price[currency] = price
-//                    }
-//                    if let imageUrl = usd["IMAGEURL"] as? String{
-//                        self.srcImage = imageUrl
-//                    }
-//                }
-//            }
-//        }
-//
-//    }
-//
-//}
-//
-//extension MarketCoins{
-//
+
+import Foundation
+
+class MarketCoins {
+
+    var name: String //FROMSYMBOL
+    var price: [String: Double] = [:] //TOSYMBOL + PRICE
+    var srcImage: String? //IMAGEURL
+
+
+    init(name: String) {
+        self.name = name
+    }
+    public func addPrice(currency: String, price: Double){
+        self.price[currency] = price
+    }
+    public func setSrcImage(srcImage: String){
+        self.srcImage = srcImage
+    }
+
+}
+
+extension MarketCoins{
+
 //    static func initMarket(urlString: String, completion: ([MarketCoins]) -> Void) {
 //        // Create a URLRequest for API Cryptocompare (BTC as coin, USD and EUR as cryptocurrencies)
 //        let url = URL(string: urlString)!
@@ -94,4 +58,4 @@
 //        }
 //        task.resume()
 //    }
-//}
+}

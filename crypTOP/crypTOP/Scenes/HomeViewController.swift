@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-    
+    private let currency = ["USD", "EUR"]
     //private var markets: [MarketCoins]
     @IBOutlet var priceLabel: UILabel!
     override func viewWillAppear(_ animated: Bool) {
@@ -30,11 +30,61 @@ class HomeViewController: UIViewController {
         let urlString = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + fsyms + "&tsyms=" + tsyms + "&api_key=" + apiKey
         URLRequest(urlString: urlString)
 
-//        MarketCoins.initMarket(urlString: urlString){ markets in
-//            self.markets = markets
-//        }
     }()
-    
+    func createMarketCoins(jsonObject: Any, marketCoins: inout MarketCoins, parameters: [String]) {
+        if let array = jsonObject as? [Any] {
+            array.forEach {
+                createMarketCoins(jsonObject: $0, marketCoins: &marketCoins, parameters: parameters)
+            }
+        }
+        else if let dict = jsonObject as? [String : Any] {
+            for key in dict.keys {
+                if self.currency.contains(key) {
+                    //marketsCoins.append(dict[key] as! String)
+                    if let currency = dict[key] as? [String: Any] {
+                        guard let price = currency["PRICE"] as? Double, let cur = currency["TOSYMBOL"] as? String else{
+                            print("Error in searching price or cur in currency:" + key)
+                            return
+                        }
+                        guard let imageUrl = currency["IMAGEURL"] as? String else{
+                            print("Error in searching imageUrl in currency:" + key)
+                            return
+                        }
+                        marketCoins.addPrice(currency: cur, price: price)
+                        marketCoins.setSrcImage(srcImage: imageUrl)
+                    }
+                    print(key)
+                }
+                else {
+                    createMarketCoins(jsonObject: dict[key]!, marketCoins: &marketCoins, parameters: parameters)
+                }
+            }
+        }
+    }
+    func extractMarketsCoins(jsonObject: Any, marketsCoins: inout [MarketCoins], parameters: [String]) {
+        if let array = jsonObject as? [Any] {
+            array.forEach {
+                extractMarketsCoins(jsonObject: $0, marketsCoins: &marketsCoins, parameters: parameters)
+            }
+        }
+        else if let dict = jsonObject as? [String : Any] {
+            for key in dict.keys {
+                if parameters.contains(key) {
+                    //marketsCoins.append(dict[key] as! String)
+                    marketsCoins.append(MarketCoins(name: key))
+                    guard var lastMarket = marketsCoins.last else{
+                        print("Error in creating a marketCoins")
+                        return
+                    }
+                    createMarketCoins(jsonObject: dict[key]!, marketCoins: &lastMarket, parameters: parameters)
+                    print(key)
+                }
+                else {
+                    extractMarketsCoins(jsonObject: dict[key]!, marketsCoins: &marketsCoins, parameters: parameters)
+                }
+            }
+        }
+    }
     func URLRequest(urlString: String){
         let url = URL(string: urlString)!
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -42,77 +92,9 @@ class HomeViewController: UIViewController {
                 do{
                     if let json =  try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]{
                         if let raw = json["RAW"] as? [String: Any] {
-                            //BTC
-                            print("In BTC:\n")
-                            if let btc = raw["BTC"] as? [String: Any] {
-                                //EUR
-                                print("In Eur:\n")
-                                if let eur = btc["EUR"] as? [String: Any] {
-                                    if let name = eur["FROMSYMBOL"] as? String{
-                                        print("name is:" + name)
-                                    }
-                                    if let price = eur["PRICE"] as? Double{
-                                        print("Price is:\(price)")
-                                    }
-                                    if let currency = eur["TOSYMBOL"] as? String{
-                                        print("Currency is:" + currency)
-                                    }
-                                    if let imageUrl = eur["IMAGEURL"] as? String{
-                                        print("ImageUrl is:" + imageUrl)
-                                    }
-                                }
-                                //USD
-                                print("In usd:\n")
-                                if let usd = btc["USD"] as? [String: Any] {
-                                    if let name = usd["FROMSYMBOL"] as? String{
-                                        print("name is:" + name)
-                                    }
-                                    if let price = usd["PRICE"] as? Double{
-                                        print("Price is:\(price)")
-                                    }
-                                    if let currency = usd["TOSYMBOL"] as? String{
-                                        print("Currency is:" + currency)
-                                    }
-                                    if let imageUrl = usd["IMAGEURL"] as? String{
-                                        print("ImageUrl is:" + imageUrl)
-                                    }
-                                }
-                            }
-                            //ETH
-                            print("\nIn ETH:\n")
-                            if let eth = raw["ETH"] as? [String: Any] {
-                                //EUR
-                                print("In Eur:\n")
-                                if let eur = eth["USD"] as? [String: Any] {
-                                    if let name = eur["FROMSYMBOL"] as? String{
-                                        print("name is:" + name)
-                                    }
-                                    if let price = eur["PRICE"] as? Double{
-                                        print("Price is:\(price)")
-                                    }
-                                    if let currency = eur["TOSYMBOL"] as? String{
-                                        print("Currency is:" + currency)
-                                    }
-                                    if let imageUrl = eur["IMAGEURL"] as? String{
-                                        print("ImageUrl is:" + imageUrl)
-                                    }
-                                }
-                                //USD
-                                if let usd = eth["USD"] as? [String: Any] {
-                                    if let name = usd["FROMSYMBOL"] as? String{
-                                        print("name is:" + name)
-                                    }
-                                    if let price = usd["PRICE"] as? Double{
-                                        print("Price is:\(price)")
-                                    }
-                                    if let currency = usd["TOSYMBOL"] as? String{
-                                        print("Currency is:" + currency)
-                                    }
-                                    if let imageUrl = usd["IMAGEURL"] as? String{
-                                        print("ImageUrl is:" + imageUrl)
-                                    }
-                                }
-                            }
+                            var marketsCoins = [MarketCoins]()
+                            let parameters = ["BTC", "ETH"]
+                            self.extractMarketsCoins(jsonObject: raw, marketsCoins: &marketsCoins, parameters: parameters)
                         }
                     }
                 }

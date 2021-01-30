@@ -52,9 +52,9 @@ extension MarketCoins{
                             return
                         }
                         marketCoins.addPrice(currency: cur, price: price)
-                        marketCoins.setSrcImage(srcImage: "cryptocompare.com" + imageUrl)
+                        marketCoins.setSrcImage(srcImage: "https://cryptocompare.com" + imageUrl)
                     }
-                    print(key)
+                    //print(key)
                 }
                 else {
                     createMarketCoins(jsonObject: dict[key]!, marketCoins: &marketCoins, parameters: parameters, currencies: currencies)
@@ -78,7 +78,7 @@ extension MarketCoins{
                         return
                     }
                     createMarketCoins(jsonObject: dict[key]!, marketCoins: &lastMarket, parameters: parameters, currencies: currencies)
-                    print(key)
+                    //print(key)
                 }
                 else {
                     extractMarketsCoins(jsonObject: dict[key]!, marketsCoins: &marketsCoins, parameters: parameters, currencies: currencies)
@@ -94,7 +94,7 @@ extension MarketCoins{
                     if let json =  try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]{
                         if let raw = json["RAW"] as? [String: Any] {
                             var marketsCoins = [MarketCoins]()
-                            let parameters = ["BTC", "ETH"]
+                            let parameters = ["BTC", "ETH", "DOGE"]
                             let currencies = ["USD", "EUR"]
                             self.extractMarketsCoins(jsonObject: raw, marketsCoins: &marketsCoins, parameters: parameters, currencies: currencies)
                             completion(marketsCoins)

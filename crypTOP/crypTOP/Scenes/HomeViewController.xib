@@ -42,14 +42,14 @@
                     <rect key="frame" x="10" y="-425" width="75" height="78"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="logo_swift" translatesAutoresizingMaskIntoConstraints="NO" id="BXP-bY-ytM">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="10" contentMode="scaleAspectFit" image="logo_swift" translatesAutoresizingMaskIntoConstraints="NO" id="BXP-bY-ytM">
                     <rect key="frame" x="134" y="81" width="111" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="111" id="Lfr-cJ-V9O"/>
                         <constraint firstAttribute="height" constant="100" id="kab-Dl-Z87"/>
                     </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="logo_swift" translatesAutoresizingMaskIntoConstraints="NO" id="8C3-MI-lYD">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="scaleAspectFit" image="logo_swift" translatesAutoresizingMaskIntoConstraints="NO" id="8C3-MI-lYD">
                     <rect key="frame" x="283" y="453" width="73" height="88"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="73" id="3av-U0-1Pw"/>
@@ -57,7 +57,7 @@
                         <constraint firstAttribute="width" constant="73" id="zxH-fg-6Qy"/>
                     </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="logo_swift" translatesAutoresizingMaskIntoConstraints="NO" id="W9q-Qn-UKp">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleAspectFit" image="logo_swift" translatesAutoresizingMaskIntoConstraints="NO" id="W9q-Qn-UKp">
                     <rect key="frame" x="153" y="453" width="73" height="88"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="73" id="Cjr-Cg-QNl"/>
@@ -65,7 +65,7 @@
                         <constraint firstAttribute="height" constant="88" id="wYz-sx-pMN"/>
                     </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="logo_swift" translatesAutoresizingMaskIntoConstraints="NO" id="Ifq-DW-Y9i">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFit" image="logo_swift" translatesAutoresizingMaskIntoConstraints="NO" id="Ifq-DW-Y9i">
                     <rect key="frame" x="26" y="453" width="73" height="88"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="73" id="1v8-Hj-2kT"/>
@@ -73,14 +73,14 @@
                         <constraint firstAttribute="height" constant="88" id="olH-XS-Cto"/>
                     </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="logo_swift" translatesAutoresizingMaskIntoConstraints="NO" id="zkA-3h-MlO">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFit" image="logo_swift" translatesAutoresizingMaskIntoConstraints="NO" id="zkA-3h-MlO">
                     <rect key="frame" x="283" y="313" width="73" height="88"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="73" id="MSI-nV-aH5"/>
                         <constraint firstAttribute="height" constant="88" id="wer-OC-amM"/>
                     </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="logo_swift" translatesAutoresizingMaskIntoConstraints="NO" id="Rfq-TF-GDz">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" image="logo_swift" translatesAutoresizingMaskIntoConstraints="NO" id="Rfq-TF-GDz">
                     <rect key="frame" x="153" y="313" width="73" height="88"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="73" id="cYn-n9-VGv"/>

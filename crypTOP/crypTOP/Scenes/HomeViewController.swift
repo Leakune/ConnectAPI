@@ -11,9 +11,9 @@ class HomeViewController: UIViewController {
     
     public var markets: [MarketCoins]? = nil
 
-    @IBOutlet var btc: CustomUIImageView!
-    @IBOutlet var eth: CustomUIImageView!
-    @IBOutlet var doge: CustomUIImageView!
+    @IBOutlet var btc: UIImageView!
+    @IBOutlet var eth: UIImageView!
+    @IBOutlet var doge: UIImageView!
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -28,24 +28,32 @@ class HomeViewController: UIViewController {
         _ = initMarkets
         dump(self.markets)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-//        self.btc.isUserInteractionEnabled = true
-//        self.btc.customAddGestureRecognizer(tap: tapGestureRecognizer, imageValue: "BTC")
-//        self.eth.isUserInteractionEnabled = true
-//        self.eth.customAddGestureRecognizer(tap: tapGestureRecognizer, imageValue: "ETH")
-//        self.doge.isUserInteractionEnabled = true
-//        self.doge.customAddGestureRecognizer(tap: tapGestureRecognizer, imageValue: "DOGE")
         self.btc.isUserInteractionEnabled = true
         self.btc.addGestureRecognizer(tapGestureRecognizer)
+        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        self.eth.isUserInteractionEnabled = true
+        self.eth.addGestureRecognizer(tapGestureRecognizer2)
+        let tapGestureRecognizer3 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        self.doge.isUserInteractionEnabled = true
+        self.doge.addGestureRecognizer(tapGestureRecognizer3)
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-        let tappedImage = tapGestureRecognizer.view as! CustomUIImageView
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
         var marketToGo: MarketCoins!
-        for market in self.markets! {
-            if market.getName() == tappedImage.imageValue{
-                marketToGo = market
-            }
+        switch tappedImage.tag {
+        case 0:
+            marketToGo = self.markets![1]
+            break
+        case 1:
+            marketToGo = self.markets![0]
+            break
+        case 2:
+            marketToGo = self.markets![2]
+            break
+        default:
+            return
         }
         self.navigationController?.pushViewController(DetailViewController.newInstance(market: marketToGo), animated: true)
     }

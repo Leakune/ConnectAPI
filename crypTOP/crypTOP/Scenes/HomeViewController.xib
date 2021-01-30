@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="crypTOP" customModuleProvider="target">
             <connections>
+                <outlet property="image" destination="GKj-NS-aJC" id="ffw-rl-3rf"/>
                 <outlet property="priceLabel" destination="F3S-lB-S1K" id="4AH-8W-Mp4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -19,31 +20,34 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDA-Kh-olT">
-                    <rect key="frame" x="186.5" y="438" width="41.5" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3S-lB-S1K">
                     <rect key="frame" x="186" y="312" width="41.5" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" misplaced="YES" image="square.and.arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="GKj-NS-aJC">
+                    <rect key="frame" x="122" y="367" width="170" height="77"/>
+                    <color key="tintColor" systemColor="labelColor"/>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBlueColor"/>
             <constraints>
                 <constraint firstItem="F3S-lB-S1K" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="2fG-LT-25j"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GKj-NS-aJC" secondAttribute="trailing" constant="122" id="GQy-an-Chp"/>
                 <constraint firstItem="F3S-lB-S1K" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="KK8-Cd-xbE"/>
-                <constraint firstItem="pDA-Kh-olT" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="SlF-ZS-ezJ"/>
-                <constraint firstItem="pDA-Kh-olT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aTX-fa-VPW"/>
+                <constraint firstItem="GKj-NS-aJC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="122" id="cBt-jz-B5x"/>
+                <constraint firstItem="GKj-NS-aJC" firstAttribute="top" secondItem="F3S-lB-S1K" secondAttribute="bottom" constant="10" id="rnd-nI-3Mw"/>
             </constraints>
             <point key="canvasLocation" x="111.59420289855073" y="89.732142857142847"/>
         </view>
     </objects>
     <resources>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

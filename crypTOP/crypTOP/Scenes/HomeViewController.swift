@@ -101,11 +101,11 @@ extension UIImageView {
         downloaded(from: url, contentMode: mode)
     }
 }
-class CustomUIImageView: UIImageView {
-    var imageValue: String?
-    func customAddGestureRecognizer(tap: UITapGestureRecognizer, imageValue: String){
-        print("here2")
-        self.addGestureRecognizer(tap)
-        self.imageValue = imageValue
-    }
-}
+//class CustomUIImageView: UIImageView {
+//    var imageValue: String?
+//    func customAddGestureRecognizer(tap: UITapGestureRecognizer, imageValue: String){
+//        print("here2")
+//        self.addGestureRecognizer(tap)
+//        self.imageValue = imageValue
+//    }
+//}

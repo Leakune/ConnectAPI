@@ -28,6 +28,9 @@ class MarketCoins {
     public func getImage() -> String{
         return self.srcImage!
     }
+    public func getPrice() -> [String: Double]{
+        return self.price
+    }
 
 }
 

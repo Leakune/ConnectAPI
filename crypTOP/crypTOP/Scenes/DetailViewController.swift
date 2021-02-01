@@ -6,10 +6,14 @@
 //
 
 import UIKit
-
-class DetailViewController: UIViewController {
+//protocol SelectTagDelegate : class {
+//    func didSelectTag(tags: String)
+//}
+class DetailViewController: UIViewController, UINavigationControllerDelegate {
+    //weak var delegate: SelectTagDelegate?
     var market: MarketCoins!
 
+    @IBOutlet var delete: UIButton!
     @IBOutlet var icon: UIImageView!
     @IBOutlet var name: UILabel!
     @IBOutlet var priceEur: UILabel!
@@ -33,6 +37,10 @@ class DetailViewController: UIViewController {
     }
 
 
+    @IBAction func onDelete(_ sender: UIButton) {
+        //delegate?.didSelectTag(tags: self.market.getName())
+        self.navigationController?.popViewController(animated: true)
+    }
     
 
 }

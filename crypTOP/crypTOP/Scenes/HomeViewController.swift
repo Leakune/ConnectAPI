@@ -10,6 +10,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     public var markets: [MarketCoins]? = nil
+    var marketToDelete: String?
 
     @IBOutlet var btc: UIImageView!
     @IBOutlet var eth: UIImageView!
@@ -18,6 +19,8 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         print("ViewWillAppear")
+//        let marketToDelete = storyboard?.instantiateViewControllerWithIdentifier("childView") as DetailViewController
+//        marketToDelete.delegate = self
         dump(self.markets)
         
     }
@@ -81,6 +84,11 @@ class HomeViewController: UIViewController {
     
 
 }
+//extension HomeViewController: SelectTagDelegate {
+//    func didSelectTag(tags: String) {
+//        marketToDelete = tags
+//    }
+//}
 extension UIImageView {
     func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
         contentMode = mode

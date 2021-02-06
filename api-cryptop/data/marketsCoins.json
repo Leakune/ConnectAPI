@@ -1,0 +1,26 @@
+[ 
+    {
+        "ID" : 1,
+        "FROMSYMBOL": "BTC",
+        "TOSYMBOL": "USD",
+        "PRICE_USD": 40281.59,
+        "PRICE_EUR": 33432.35,
+        "IMAGEURL": "https://cryptocompare.com/media/19633/btc.png"
+    },
+    {
+        "ID" : 2,
+        "FROMSYMBOL": "ETH",
+        "TOSYMBOL": "USD",
+        "PRICE_USD": 1687.98,
+        "PRICE_EUR": 1401.33,
+        "IMAGEURL": "https://cryptocompare.com/media/20646/eth_logo.png"
+    },
+    {
+        "ID" : 3,
+        "FROMSYMBOL": "DOGE",
+        "TOSYMBOL": "USD",
+        "PRICE_USD": 0.0504,
+        "PRICE_EUR": 0.0417904375,
+        "IMAGEURL": "https://cryptocompare.com/media/19684/doge.png"
+    }
+]

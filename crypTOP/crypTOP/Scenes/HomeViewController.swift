@@ -12,15 +12,13 @@ class HomeViewController: UIViewController {
     public var markets: [MarketCoins]? = nil
     var marketToDelete: String?
 
-    @IBOutlet var btc: UIImageView!
-    @IBOutlet var eth: UIImageView!
-    @IBOutlet var doge: UIImageView!
+//    @IBOutlet var btc: UIImageView!
+//    @IBOutlet var eth: UIImageView!
+//    @IBOutlet var doge: UIImageView!
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         print("ViewWillAppear")
-//        let marketToDelete = storyboard?.instantiateViewControllerWithIdentifier("childView") as DetailViewController
-//        marketToDelete.delegate = self
         dump(self.markets)
         
     }
@@ -30,15 +28,8 @@ class HomeViewController: UIViewController {
         //appel unique de la fonction iniMarkets
         _ = initMarkets
         dump(self.markets)
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        self.btc.isUserInteractionEnabled = true
-        self.btc.addGestureRecognizer(tapGestureRecognizer)
-        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        self.eth.isUserInteractionEnabled = true
-        self.eth.addGestureRecognizer(tapGestureRecognizer2)
-        let tapGestureRecognizer3 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        self.doge.isUserInteractionEnabled = true
-        self.doge.addGestureRecognizer(tapGestureRecognizer3)
+        //self.addTapGestureRecognizer()
+        
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
@@ -63,24 +54,36 @@ class HomeViewController: UIViewController {
     
     //Appeler qu'une seule fois la fonction pour initialiser des markets
     private lazy var initMarkets: Void = {
-        var markets = [MarketCoins]()
-        let fsyms = "BTC,ETH,DOGE"
-        let tsyms = "USD,EUR"
-        let apiKey = "8cf7e8afc81e05ac24dff8fde7c369a53cfb6820fd77245245dffb9762fd9c90"
-        let urlString = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + fsyms + "&tsyms=" + tsyms + "&api_key=" + apiKey
+//        let fsyms = "BTC,ETH,DOGE"
+//        let tsyms = "USD,EUR"
+//        let apiKey = "8cf7e8afc81e05ac24dff8fde7c369a53cfb6820fd77245245dffb9762fd9c90"
+//        let urlString = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + fsyms + "&tsyms=" + tsyms + "&api_key=" + apiKey
+        let urlString = "https://api-cryptop.herokuapp.com/MarketsCoins/"
         MarketCoins.URLRequest(urlString: urlString,completion:{ marketCoins in
             DispatchQueue.main.async {
                 self.markets = marketCoins
                 print("InitMarket")
                 dump(self.markets)
                 //self.priceLabel.text = marketCoins[0].getName()
-                print(marketCoins[0].getImage())
-                self.btc.downloaded(from: marketCoins[1].getImage())
-                self.eth.downloaded(from: marketCoins[0].getImage())
-                self.doge.downloaded(from: marketCoins[2].getImage())
+//                print(marketCoins[0].getImage())
+//                self.btc.downloaded(from: marketCoins[1].getImage())
+//                self.eth.downloaded(from: marketCoins[0].getImage())
+//                self.doge.downloaded(from: marketCoins[2].getImage())
             }
         })
     }()
+    
+//    public func addTapGestureRecognizer(){
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+//        self.btc.isUserInteractionEnabled = true
+//        self.btc.addGestureRecognizer(tapGestureRecognizer)
+//        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+//        self.eth.isUserInteractionEnabled = true
+//        self.eth.addGestureRecognizer(tapGestureRecognizer2)
+//        let tapGestureRecognizer3 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+//        self.doge.isUserInteractionEnabled = true
+//        self.doge.addGestureRecognizer(tapGestureRecognizer3)
+//    }
     
 
 }

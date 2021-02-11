@@ -30,10 +30,10 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
         print("In Detail")
         dump(self.market)
         
-        self.icon.downloaded(from: self.market.getImage())
-        self.name.text = self.market.getName()
-        self.priceEur.text = "$" + String(self.market.getPrice()["EUR"]!)
-        self.priceUsd.text = String(self.market.getPrice()["USD"]!) + "€"
+//        self.icon.downloaded(from: self.market.getImage())
+//        self.name.text = self.market.getName()
+//        self.priceEur.text = "$" + String(self.market.getPrice()["EUR"]!)
+//        self.priceUsd.text = String(self.market.getPrice()["USD"]!) + "€"
     }
 
 

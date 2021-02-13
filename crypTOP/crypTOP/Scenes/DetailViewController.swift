@@ -19,16 +19,18 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet var priceEur: UILabel!
     @IBOutlet var priceUsd: UILabel!
     
-    class func newInstance(market: MarketCoins) -> DetailViewController {
-        let detail = DetailViewController()
-        detail.market = market
-        return detail
+    static func newInstance(market: MarketCoins) -> DetailViewController {
+        let controller = DetailViewController()
+        controller.market = market
+        return controller
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("In Detail")
         dump(self.market)
+        self.title = "Detail"
+
         
 //        self.icon.downloaded(from: self.market.getImage())
 //        self.name.text = self.market.getName()

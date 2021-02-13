@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="crypTOP" customModuleProvider="target">
             <connections>
+                <outlet property="tableCrypto" destination="MK2-DJ-2ch" id="4yg-vn-pun"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -37,10 +38,10 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CripTOP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMn-I8-g1g">
-                    <rect key="frame" x="134" y="191" width="122" height="38.333333333333343"/>
+                    <rect key="frame" x="133" y="191" width="124" height="38.333333333333343"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="38.329999999999998" id="Ktc-2A-zhZ"/>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="122" id="UrZ-pj-Rv9"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="124" id="UrZ-pj-Rv9"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                     <color key="textColor" systemColor="systemTealColor"/>

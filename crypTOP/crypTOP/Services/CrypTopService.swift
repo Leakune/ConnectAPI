@@ -55,7 +55,35 @@ class CrypTopService{
         let imageURL = image != nil ? URL(string: image!) : nil
         return MarketCoins(id: id, name: name, price_usd: price_usd, price_eur: price_eur, imageURL: imageURL, comments: comments)
     }
-    
+    public static func update(id: Int, market: MarketCoins, completion: @escaping (Bool) -> Void) -> Void {
+        guard let updateMarketURL = URL(string: "https://api-cryptop.herokuapp.com/MarketsCoins/\(id)") else {
+            completion(false)
+            return
+        }
+        var request = Foundation.URLRequest(url: updateMarketURL)
+        request.httpMethod = "PUT"
+        
+        print("in update:")
+        dump(market)
+        let dict = self.dictionaryFromMarket(market)
+        print("dict")
+        print(dict)
+
+        let data = try? JSONSerialization.data(withJSONObject: dict, options: .fragmentsAllowed)
+        print("data")
+        print(data as Any)
+
+        request.httpBody = data
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let task = URLSession.shared.dataTask(with: request) { (data, response, err) in
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(false)
+                return
+            }
+            completion(httpResponse.statusCode == 201)
+        }
+        task.resume()
+    }
     public static func create(market: MarketCoins, completion: @escaping (Bool) -> Void) -> Void {
         guard let createMarketURL = URL(string: "https://api-cryptop.herokuapp.com/MarketsCoins/") else {
             completion(false)
@@ -65,12 +93,8 @@ class CrypTopService{
         request.httpMethod = "POST"
         
         let dict = self.dictionaryFromMarket(market)
-        print("dict")
-        print(dict)
 
         let data = try? JSONSerialization.data(withJSONObject: dict, options: .fragmentsAllowed)
-        print("data")
-        print(data as Any)
 
         request.httpBody = data
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

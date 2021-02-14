@@ -85,8 +85,8 @@ extension AllCryptoViewController: UITableViewDelegate {
         let marketCompare = self.marketsCompare[indexPath.row] // recuperer le café à la bonne ligne
         guard let marketsCoins = self.marketsCoins else { return }
         if marketIsAlreadyInFavoris(marketCompare: marketCompare, marketsCoins: marketsCoins){
-            //let marketCoins = findMarketCoinsByMarketCompare
-            //goToUpdateMarketCoinsInFavoris(marketCompare: marketCompare, marketCoins: marketCoins)
+            let marketCoins = findMarketCoinsByMarketCompare(marketCompare: marketCompare, marketsCoins: marketsCoins)
+            goToUpdateMarketCoinsInFavoris(marketCompare: marketCompare, marketCoins: marketCoins!)
         }else{
             goCreateMarketCoinsInFavoris(marketCompare: marketCompare)
         }
@@ -110,7 +110,27 @@ extension AllCryptoViewController: UITableViewDelegate {
         return nil
     }
     func goToUpdateMarketCoinsInFavoris(marketCompare: MarketCompare, marketCoins: MarketCoins){
-        
+        let alert = UIAlertController(title: "Update market", message: "Do you want to update data of the market \(marketCompare.getName()) ?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { action in
+            print("updating market \(marketCompare.getName()) ...")
+            let market = self.prepareUpdateMarketCoins(marketCompare: marketCompare, marketCoins: marketCoins)
+            dump(market)
+
+            CrypTopService.update(id: market.id!, market: market){ (success) in
+                DispatchQueue.main.sync {
+                    if(success) {
+                        // alert OK
+                        print("success")
+                        //self.navigationController?.popViewController(animated: true)
+                    } else {
+                        let alert = UIAlertController(title: "Erreur", message: "request did not worked", preferredStyle: .alert)
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     func goCreateMarketCoinsInFavoris(marketCompare: MarketCompare){
         let alert = UIAlertController(title: "Add to favoris", message: "Do you want to add the market \(marketCompare.getName()) into your favoris?", preferredStyle: .alert)
@@ -124,7 +144,7 @@ extension AllCryptoViewController: UITableViewDelegate {
                         print("success")
                         //self.navigationController?.popViewController(animated: true)
                     } else {
-                        let alert = UIAlertController(title: "Erreur", message: "Champs obligatoires", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Erreur", message: "request did not worked", preferredStyle: .alert)
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
@@ -133,6 +153,9 @@ extension AllCryptoViewController: UITableViewDelegate {
         alert.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
         
+    }
+    func prepareUpdateMarketCoins(marketCompare: MarketCompare, marketCoins: MarketCoins) -> MarketCoins{
+        return MarketCoins(id: marketCoins.id, name: marketCoins.getName(), price_usd: marketCompare.getPrice()["USD"]!, price_eur: marketCompare.getPrice()["EUR"]!, imageURL: marketCompare.imageUrl, comments: marketCoins.comments)
     }
     func prepareCreateMarketCoins(marketCompare: MarketCompare) -> MarketCoins{
         return MarketCoins(id: nil, name: marketCompare.getName(), price_usd: marketCompare.getPrice()["USD"]!, price_eur: marketCompare.getPrice()["EUR"]!, imageURL: marketCompare.imageUrl, comments: [])

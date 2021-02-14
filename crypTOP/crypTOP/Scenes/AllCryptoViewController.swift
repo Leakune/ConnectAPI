@@ -119,9 +119,9 @@ extension AllCryptoViewController: UITableViewDelegate {
             CrypTopService.update(id: market.id!, market: market){ (success) in
                 DispatchQueue.main.sync {
                     if(success) {
-                        // alert OK
-                        print("success")
-                        //self.navigationController?.popViewController(animated: true)
+                        let alert = UIAlertController(title: "Success", message: "Market \(marketCoins.getName()) is updated!", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
                     } else {
                         let alert = UIAlertController(title: "Erreur", message: "request did not worked", preferredStyle: .alert)
                         self.present(alert, animated: true, completion: nil)
@@ -140,11 +140,14 @@ extension AllCryptoViewController: UITableViewDelegate {
             CrypTopService.create(market: marketCoins){ (success) in
                 DispatchQueue.main.sync {
                     if(success) {
-                        // alert OK
-                        print("success")
-                        //self.navigationController?.popViewController(animated: true)
+                        let alert = UIAlertController(title: "Success", message: "Market \(marketCoins.getName()) is added in your favoris!", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { action in
+                            self.navigationController?.popViewController(animated: true)
+                        }))
+                        self.present(alert, animated: true, completion: nil)
                     } else {
-                        let alert = UIAlertController(title: "Erreur", message: "request did not worked", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Error", message: "request did not worked", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     }
                 }

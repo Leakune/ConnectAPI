@@ -8,23 +8,7 @@
 import Foundation
 
 class CrypTopService{
-    //    public func delete(id: Int, completion: @escaping (Bool) -> Void) -> Void {
-    //        guard let removeCoffeeURL = URL(string: "https://moc-3a.herokuapp.com/coffee/\(id)") else {
-    //            completion(false)
-    //            return
-    //        }
-    //        var request = URLRequest(url: removeCoffeeURL)
-    //        request.httpMethod = "DELETE"
-    //
-    //        let task = URLSession.shared.dataTask(with: request) { (data, response, err) in
-    //            guard let httpResponse = response as? HTTPURLResponse else {
-    //                completion(false)
-    //                return
-    //            }
-    //            completion(httpResponse.statusCode == 204)
-    //        }
-    //        task.resume()
-    //    }
+    
     public static func dictionaryFromMarket(_ market: MarketCoins) -> [String: Any] {
         var dict: [String: Any] = [:]
         dict["NAME"] = market.getName()
@@ -55,6 +39,7 @@ class CrypTopService{
         let imageURL = image != nil ? URL(string: image!) : nil
         return MarketCoins(id: id, name: name, price_usd: price_usd, price_eur: price_eur, imageURL: imageURL, comments: comments)
     }
+    
     public static func update(id: Int, market: MarketCoins, completion: @escaping (Bool) -> Void) -> Void {
         guard let updateMarketURL = URL(string: "https://api-cryptop.herokuapp.com/MarketsCoins/\(id)") else {
             completion(false)
@@ -104,6 +89,23 @@ class CrypTopService{
                 return
             }
             completion(httpResponse.statusCode == 201)
+        }
+        task.resume()
+    }
+    public static func delete(id: Int, completion: @escaping (Bool) -> Void) -> Void {
+        guard let removeMarketURL = URL(string: "https://api-cryptop.herokuapp.com/MarketsCoins/\(id)") else {
+            completion(false)
+            return
+        }
+        var request = Foundation.URLRequest(url: removeMarketURL)
+        request.httpMethod = "DELETE"
+
+        let task = URLSession.shared.dataTask(with: request) { (data, response, err) in
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(false)
+                return
+            }
+            completion(httpResponse.statusCode == 204)
         }
         task.resume()
     }

@@ -19,12 +19,10 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         print("ViewWillAppear")
-        dump(self.markets)
         //appel unique de la fonction iniMarkets
         self.tableCrypto.dataSource = self
         self.tableCrypto.delegate = self
-        _ = initMarkets
-        dump(self.markets)
+        self.initMarkets()
         
     }
     override func viewDidLoad() {
@@ -37,82 +35,33 @@ class HomeViewController: UIViewController {
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
         
-        self.navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAddProduct)),
-            UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(handleEditList))
-        ]
-    }
-    
-    @objc func handleEditList() {
-        self.tableCrypto.isEditing = !self.tableCrypto.isEditing
     }
     
     @objc func handleAddProduct() {
-        let controller = AllCryptoViewController()
+        let controller = AllCryptoViewController.newInstance(marketsCoins: self.markets)
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
-//    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
-//    {
-//        let tappedImage = tapGestureRecognizer.view as! UIImageView
-//        var marketToGo: MarketCoins!
-//        switch tappedImage.tag {
-//        case 0:
-//            marketToGo = self.markets![1]
-//            break
-//        case 1:
-//            marketToGo = self.markets![0]
-//            break
-//        case 2:
-//            marketToGo = self.markets![2]
-//            break
-//        default:
-//            return
-//        }
-//        self.navigationController?.pushViewController(DetailViewController.newInstance(market: marketToGo), animated: true)
-//    }
     
     //Appeler qu'une seule fois la fonction pour initialiser des markets
-    private lazy var initMarkets: Void = {
-//        let fsyms = "BTC,ETH,DOGE"
-//        let tsyms = "USD,EUR"
-//        let apiKey = "8cf7e8afc81e05ac24dff8fde7c369a53cfb6820fd77245245dffb9762fd9c90"
-//        let urlString = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + fsyms + "&tsyms=" + tsyms + "&api_key=" + apiKey
+    public func initMarkets() -> Void{
         let urlString = "https://api-cryptop.herokuapp.com/MarketsCoins/"
         CrypTopService.URLRequest(urlString: urlString,completion:{ marketCoins in
             DispatchQueue.main.async {
                 self.markets = marketCoins
                 print("InitMarket")
                 dump(self.markets)
-                self.tableCrypto.reloadData() // force à la table de recharger les données
-                //self.priceLabel.text = marketCoins[0].getName()
-//                print(marketCoins[0].getImage())
-//                self.btc.downloaded(from: marketCoins[1].getImage())
-//                self.eth.downloaded(from: marketCoins[0].getImage())
-//                self.doge.downloaded(from: marketCoins[2].getImage())
-            }
+                self.tableCrypto.reloadData()
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.handleAddProduct))
+             }
         })
-    }()
+    }
     
-//    public func addTapGestureRecognizer(){
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-//        self.btc.isUserInteractionEnabled = true
-//        self.btc.addGestureRecognizer(tapGestureRecognizer)
-//        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-//        self.eth.isUserInteractionEnabled = true
-//        self.eth.addGestureRecognizer(tapGestureRecognizer2)
-//        let tapGestureRecognizer3 = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-//        self.doge.isUserInteractionEnabled = true
-//        self.doge.addGestureRecognizer(tapGestureRecognizer3)
-//    }
+
     
 
 }
-//extension HomeViewController: SelectTagDelegate {
-//    func didSelectTag(tags: String) {
-//        marketToDelete = tags
-//    }
-//}
+
 
 
 extension HomeViewController: UITableViewDataSource {
@@ -144,7 +93,7 @@ extension HomeViewController: UITableViewDataSource {
         cell.textLabel?.textColor = color
     }
     func configImage(cell: UITableViewCell, market: MarketCoins) -> Void{
-        if let data = NSData(contentsOf: market.getImageUrl())
+        if let data = NSData(contentsOf: market.imageUrl!)
         {
             cell.imageView?.image = UIImage(data: data as Data)
         }

@@ -10,7 +10,7 @@ import Foundation
 class MarketCompare{
     private var name: String //FROMSYMBOL
     private var price: [String: Double] = [:] //TOSYMBOL + PRICE
-    private var imageUrl: URL? //IMAGEURL
+    var imageUrl: URL? //IMAGEURL
 
     init(name: String) {
         self.name = name
@@ -29,7 +29,7 @@ class MarketCompare{
     public func getPrice() -> [String: Double]{
         return self.price
     }
-    public func getImageUrl() -> URL{
-        return self.imageUrl!
-    }
+//    public func getImageUrl() -> URL{
+//        return self.imageUrl!
+//    }
 }

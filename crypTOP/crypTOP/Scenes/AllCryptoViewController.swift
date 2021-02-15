@@ -26,6 +26,8 @@ class AllCryptoViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+
         self.tableAllCryptos.dataSource = self
         self.tableAllCryptos.delegate = self
         
@@ -110,26 +112,21 @@ extension AllCryptoViewController: UITableViewDelegate {
         return nil
     }
     func goToUpdateMarketCoinsInFavoris(marketCompare: MarketCompare, marketCoins: MarketCoins){
-        let alert = UIAlertController(title: "Update market", message: "Do you want to update data of the market \(marketCompare.getName()) ?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { action in
+        let alert = UIAlertController(title: "Market already in Favoris", message: "The market \(marketCompare.getName()) is already in your favoris", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { action in
             print("updating market \(marketCompare.getName()) ...")
             let market = self.prepareUpdateMarketCoins(marketCompare: marketCompare, marketCoins: marketCoins)
             dump(market)
 
             CrypTopService.update(id: market.id!, market: market){ (success) in
                 DispatchQueue.main.sync {
-                    if(success) {
-                        let alert = UIAlertController(title: "Success", message: "Market \(marketCoins.getName()) is updated!", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                    } else {
+                    if(!success) {
                         let alert = UIAlertController(title: "Erreur", message: "request did not worked", preferredStyle: .alert)
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
             }
         }))
-        alert.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     func goCreateMarketCoinsInFavoris(marketCompare: MarketCompare){

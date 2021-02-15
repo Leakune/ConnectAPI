@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="crypTOP" customModuleProvider="target">
             <connections>
+                <outlet property="marketButton" destination="VPq-cF-Shf" id="jJA-As-HNb"/>
                 <outlet property="tableCrypto" destination="MK2-DJ-2ch" id="4yg-vn-pun"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -55,6 +56,17 @@
                         <constraint firstAttribute="height" constant="564.66999999999996" id="THY-a6-bpS"/>
                     </constraints>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPq-cF-Shf">
+                    <rect key="frame" x="289" y="44" width="85" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="uGe-VA-Ghd"/>
+                        <constraint firstAttribute="width" constant="85" id="vUA-0n-6C8"/>
+                    </constraints>
+                    <state key="normal" image="buy_market"/>
+                    <connections>
+                        <action selector="goToMarket:" destination="-1" eventType="touchUpInside" id="6WG-qG-oNA"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemGrayColor"/>
@@ -70,14 +82,17 @@
                 <constraint firstItem="BXP-bY-ytM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hXE-f0-zjy"/>
                 <constraint firstAttribute="trailing" secondItem="EXP-yt-k7B" secondAttribute="trailing" constant="-25" id="i3q-1K-2Co"/>
                 <constraint firstItem="UMn-I8-g1g" firstAttribute="top" secondItem="BXP-bY-ytM" secondAttribute="bottom" constant="10" id="kM9-EH-bFD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VPq-cF-Shf" secondAttribute="trailing" constant="16" id="l94-Ra-IVA"/>
                 <constraint firstItem="EXP-yt-k7B" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-435" id="pFC-fq-fPQ"/>
                 <constraint firstItem="MK2-DJ-2ch" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="tcV-ou-fFd"/>
+                <constraint firstItem="VPq-cF-Shf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ucS-Qt-SQe"/>
             </constraints>
             <point key="canvasLocation" x="110.76923076923076" y="89.5734597156398"/>
         </view>
     </objects>
     <resources>
         <image name="a6d7ba8ac7d80dbe98b34f1aa970165c" width="946" height="2048"/>
+        <image name="buy_market" width="647" height="373"/>
         <image name="logo_swift" width="111" height="100"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

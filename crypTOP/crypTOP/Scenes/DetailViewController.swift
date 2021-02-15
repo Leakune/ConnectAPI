@@ -24,8 +24,12 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
         controller.market = market
         return controller
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+
+    }
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         print("In Detail")
         dump(self.market)
@@ -47,6 +51,7 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
         //delegate?.didSelectTag(tags: self.market.getName())
         self.navigationController?.popViewController(animated: true)
     }
-    
+//    let controller = AllCryptoViewController.newInstance(marketsCoins: self.markets)
+//    self.navigationController?.pushViewController(controller, animated: true)
 
 }

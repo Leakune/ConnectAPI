@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AllCryptoViewController" customModule="crypTOP" customModuleProvider="target">
             <connections>
-                <outlet property="tableAllCryptos" destination="qFe-Rd-dRr" id="KDA-Yp-RQL"/>
+                <outlet property="tableAllCryptos" destination="te3-km-XsX" id="Xk4-b7-U8G"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,25 +27,30 @@
                     </preferredSymbolConfiguration>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="logo2" translatesAutoresizingMaskIntoConstraints="NO" id="H1i-L4-U3v">
-                    <rect key="frame" x="16" y="57" width="382" height="116"/>
+                    <rect key="frame" x="16" y="59" width="382" height="116"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="382" id="Jxr-ZT-Qm6"/>
-                        <constraint firstAttribute="height" constant="116" id="L0v-iB-1DH"/>
+                        <constraint firstAttribute="width" constant="382" id="3W5-1U-CQY"/>
+                        <constraint firstAttribute="height" constant="116" id="S7v-Ur-v5g"/>
                     </constraints>
                 </imageView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="qFe-Rd-dRr">
-                    <rect key="frame" x="10" y="232" width="394" height="314"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="te3-km-XsX">
+                    <rect key="frame" x="18" y="194" width="378" height="328"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="328" id="Abt-qV-1sB"/>
+                        <constraint firstAttribute="width" constant="378" id="Zro-JN-XKZ"/>
+                    </constraints>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="qFe-Rd-dRr" firstAttribute="top" secondItem="H1i-L4-U3v" secondAttribute="bottom" constant="59" id="8t2-nG-n82"/>
-                <constraint firstItem="H1i-L4-U3v" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="57" id="Fkl-3j-8hZ"/>
-                <constraint firstAttribute="trailing" secondItem="H1i-L4-U3v" secondAttribute="trailing" constant="16" id="NwV-Xw-Ft6"/>
-                <constraint firstItem="H1i-L4-U3v" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="hq5-2I-ZeE"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="H1i-L4-U3v" secondAttribute="trailing" constant="16" id="20I-RW-uNf"/>
+                <constraint firstItem="H1i-L4-U3v" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="84m-Qc-1Xc"/>
+                <constraint firstItem="H1i-L4-U3v" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="Ccy-Na-mBi"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="te3-km-XsX" secondAttribute="trailing" constant="18" id="E6C-tM-qVz"/>
+                <constraint firstItem="te3-km-XsX" firstAttribute="top" secondItem="H1i-L4-U3v" secondAttribute="bottom" constant="19" id="JuI-Il-iqO"/>
+                <constraint firstItem="te3-km-XsX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="18" id="pLh-kj-C13"/>
             </constraints>
             <point key="canvasLocation" x="111.59420289855073" y="51.5625"/>
         </view>

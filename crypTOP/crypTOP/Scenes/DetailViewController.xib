@@ -10,7 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController" customModule="crypTOP" customModuleProvider="target">
             <connections>
-                <outlet property="delete" destination="vjl-NR-GRt" id="FoA-Ye-dJO"/>
                 <outlet property="icon" destination="lnw-xy-8H6" id="L1a-nZ-kPE"/>
                 <outlet property="name" destination="tLl-vU-tli" id="Nsc-22-5jo"/>
                 <outlet property="priceEur" destination="XEZ-sR-99G" id="xAR-Uv-R6c"/>
@@ -96,21 +95,6 @@
                     <color key="textColor" systemColor="systemTealColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjl-NR-GRt">
-                    <rect key="frame" x="168.5" y="800" width="77" height="41"/>
-                    <color key="backgroundColor" systemColor="systemPinkColor"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="77" id="Doi-h4-CUy"/>
-                        <constraint firstAttribute="height" constant="41" id="hOf-jl-a7z"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                    <state key="normal" title="Delete">
-                        <color key="titleColor" systemColor="systemBackgroundColor"/>
-                    </state>
-                    <connections>
-                        <action selector="onDelete:" destination="-1" eventType="touchUpInside" id="i1K-tl-Akn"/>
-                    </connections>
-                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -118,7 +102,6 @@
                 <constraint firstItem="lnw-xy-8H6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0go-sW-HAl"/>
                 <constraint firstItem="TYp-mu-ipa" firstAttribute="top" secondItem="XEZ-sR-99G" secondAttribute="bottom" constant="30" id="BEf-pC-zFE"/>
                 <constraint firstItem="lnw-xy-8H6" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="41" id="GMZ-q6-4RZ"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vjl-NR-GRt" secondAttribute="bottom" constant="21" id="Gle-QZ-VN4"/>
                 <constraint firstItem="Cn8-wn-T8z" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="Ofw-4M-dKV"/>
                 <constraint firstItem="tLl-vU-tli" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="200" id="Qfm-Ky-v3O"/>
                 <constraint firstItem="M7A-ke-dTb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="200" id="Rqw-87-1sP"/>
@@ -127,7 +110,6 @@
                 <constraint firstItem="tLl-vU-tli" firstAttribute="leading" secondItem="M7A-ke-dTb" secondAttribute="trailing" constant="30" id="lJf-l1-Mmj"/>
                 <constraint firstItem="63w-j9-Q9M" firstAttribute="top" secondItem="Cn8-wn-T8z" secondAttribute="bottom" constant="30" id="lhk-NK-H7Y"/>
                 <constraint firstItem="M7A-ke-dTb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="mcb-fo-Zby"/>
-                <constraint firstItem="vjl-NR-GRt" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qgp-VE-0fO"/>
                 <constraint firstItem="Cn8-wn-T8z" firstAttribute="top" secondItem="M7A-ke-dTb" secondAttribute="bottom" constant="30" id="rno-HA-FrP"/>
                 <constraint firstItem="XEZ-sR-99G" firstAttribute="leading" secondItem="Cn8-wn-T8z" secondAttribute="trailing" constant="25" id="vUC-xH-pN2"/>
                 <constraint firstItem="63w-j9-Q9M" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="zju-Em-KaN"/>
@@ -140,9 +122,6 @@
         <image name="download" width="225" height="225"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -38,7 +38,6 @@ class AllCryptoViewController: UIViewController {
         CryptoCompareService.URLRequest(urlString: urlString,completion:{ marketCompares in
             DispatchQueue.main.async {
                 self.marketsCompare = marketCompares
-                print("CryptoCompare")
                 self.tableAllCryptos.reloadData()
             }
         })
@@ -87,8 +86,7 @@ extension AllCryptoViewController: UITableViewDelegate {
         let marketCompare = self.marketsCompare[indexPath.row] // recuperer le café à la bonne ligne
         guard let marketsCoins = self.marketsCoins else { return }
         if marketIsAlreadyInFavoris(marketCompare: marketCompare, marketsCoins: marketsCoins){
-            let marketCoins = findMarketCoinsByMarketCompare(marketCompare: marketCompare, marketsCoins: marketsCoins)
-            goToUpdateMarketCoinsInFavoris(marketCompare: marketCompare, marketCoins: marketCoins!)
+            displayErrorMessage(marketCompare: marketCompare)
         }else{
             goCreateMarketCoinsInFavoris(marketCompare: marketCompare)
         }
@@ -111,22 +109,9 @@ extension AllCryptoViewController: UITableViewDelegate {
         }
         return nil
     }
-    func goToUpdateMarketCoinsInFavoris(marketCompare: MarketCompare, marketCoins: MarketCoins){
+    func displayErrorMessage(marketCompare: MarketCompare){
         let alert = UIAlertController(title: "Market already in Favoris", message: "The market \(marketCompare.getName()) is already in your favoris", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { action in
-            print("updating market \(marketCompare.getName()) ...")
-            let market = self.prepareUpdateMarketCoins(marketCompare: marketCompare, marketCoins: marketCoins)
-            dump(market)
-
-            CrypTopService.update(id: market.id!, market: market){ (success) in
-                DispatchQueue.main.sync {
-                    if(!success) {
-                        let alert = UIAlertController(title: "Erreur", message: "request did not worked", preferredStyle: .alert)
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
-            }
-        }))
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     func goCreateMarketCoinsInFavoris(marketCompare: MarketCompare){

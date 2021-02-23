@@ -6,14 +6,9 @@
 //
 
 import UIKit
-//protocol SelectTagDelegate : class {
-//    func didSelectTag(tags: String)
-//}
 class DetailViewController: UIViewController, UINavigationControllerDelegate {
-    //weak var delegate: SelectTagDelegate?
     var market: MarketCoins!
 
-    @IBOutlet var delete: UIButton!
     @IBOutlet var icon: UIImageView!
     @IBOutlet var name: UILabel!
     @IBOutlet var priceEur: UILabel!
@@ -42,16 +37,7 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
         let priceUsd = String(format: "%.3f", self.market.getPriceUsd())
         let priceEur = String(format: "%.3f", self.market.getPriceEur())
 
-        self.priceEur.text = "$" + priceUsd
-        self.priceUsd.text = priceEur + "€"
+        self.priceUsd.text = "$" + priceUsd
+        self.priceEur.text = priceEur + "€"
     }
-
-
-    @IBAction func onDelete(_ sender: UIButton) {
-        //delegate?.didSelectTag(tags: self.market.getName())
-        self.navigationController?.popViewController(animated: true)
-    }
-//    let controller = AllCryptoViewController.newInstance(marketsCoins: self.markets)
-//    self.navigationController?.pushViewController(controller, animated: true)
-
 }

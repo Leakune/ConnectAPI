@@ -18,7 +18,6 @@ class CryptoCompareService{
             else if let dict = jsonObject as? [String : Any] {
                 for key in dict.keys {
                     if currencies.contains(key) {
-                        //marketsCoins.append(dict[key] as! String)
                         if let currency = dict[key] as? [String: Any] {
                             guard let price = currency["PRICE"] as? Double, let cur = currency["TOSYMBOL"] as? String else{
                                 print("Error in searching price or cur in currency:" + key)

@@ -11,15 +11,12 @@ class HomeViewController: UIViewController {
     
     public var markets: [MarketCoins] = []
     public var marketsCompare: [MarketCompare] = []
-    var marketToDelete: String?
     @IBOutlet var tableCrypto: UITableView!
     @IBOutlet var marketButton: UIButton!
     
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        print("ViewWillAppear")
-        //appel unique de la fonction iniMarkets
         self.tableCrypto.dataSource = self
         self.tableCrypto.delegate = self
         self.initMarkets()
@@ -27,28 +24,23 @@ class HomeViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ViewDidLoad")
-        //self.addTapGestureRecognizer()
-        
         self.title = "Home"
         
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
     }
-    
+    //bouton redirection AllCryptoViewController
     @IBAction func goToMarket(_ sender: Any) {
         let controller = AllCryptoViewController.newInstance(marketsCoins: self.markets)
         self.navigationController?.pushViewController(controller, animated: true)
         
     }
-    
-    //Appeler qu'une seule fois la fonction pour initialiser des markets
+    //appel de l'url request pour récupérer les données des marchés de l'api CryptoCompare
     public func initMarkets() -> Void{
         let urlString = "https://api-cryptop.herokuapp.com/MarketsCoins/"
         CrypTopService.URLRequest(urlString: urlString,completion:{ marketCoins in
             DispatchQueue.main.async {
                 self.markets = marketCoins
-                print("InitMarket")
                 dump(self.markets)
                 
                 let fsyms = "BTC,ETH,DOGE,XRP,XLM,LTC,ADA,DOT,LINK,EOS,BCH"
@@ -58,11 +50,9 @@ class HomeViewController: UIViewController {
                 CryptoCompareService.URLRequest(urlString: urlString,completion:{ marketCompares in
                     DispatchQueue.main.async {
                         self.marketsCompare = marketCompares
-                        print("CryptoCompare")
                         self.tableCrypto.reloadData()
                     }
                 })
-//                self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.handleAddProduct))
              }
         })
     }
@@ -115,7 +105,7 @@ extension HomeViewController: UITableViewDelegate {
         let market = self.markets[indexPath.row] // recuperer le café à la bonne ligne
         let marketsCompare = self.marketsCompare
 
-        let marketCompareFound = findMarketCoinsByMarketCompare(marketsCompare: marketsCompare, marketCoins: market)
+        let marketCompareFound = findMarketCompareByMarketCoins(marketsCompare: marketsCompare, marketCoins: market)
         updateMarketCoin(marketCompare: marketCompareFound!, marketCoins: market)
     }
     
@@ -136,7 +126,7 @@ extension HomeViewController: UITableViewDelegate {
     func prepareUpdateMarketCoins(marketCompare: MarketCompare, marketCoins: MarketCoins) -> MarketCoins{
         return MarketCoins(id: marketCoins.id, name: marketCoins.getName(), price_usd: marketCompare.getPrice()["USD"]!, price_eur: marketCompare.getPrice()["EUR"]!, imageURL: marketCompare.imageUrl, comments: marketCoins.comments)
     }
-    func findMarketCoinsByMarketCompare(marketsCompare: [MarketCompare], marketCoins: MarketCoins) -> MarketCompare?{
+    func findMarketCompareByMarketCoins(marketsCompare: [MarketCompare], marketCoins: MarketCoins) -> MarketCompare?{
         for marketCompare in marketsCompare {
             if marketCompare.getName() == marketCoins.getName(){
                 return marketCompare
@@ -167,11 +157,3 @@ extension HomeViewController: UITableViewDelegate {
         self.markets.insert(market, at: destinationIndexPath.row)
     }
 }
-
-//class CustomUIImageView: UIImageView {
-//    var imageValue: String?
-//    func customAddGestureRecognizer(tap: UITapGestureRecognizer, imageValue: String){
-//        self.addGestureRecognizer(tap)
-//        self.imageValue = imageValue
-//    }
-//}

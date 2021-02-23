@@ -14,7 +14,7 @@ class MarketCoins {
     private var price_usd: Double
     private var price_eur: Double
     var imageUrl: URL?
-    var comments: [String]? //ajout nom de l'utilisateur?
+    var comments: [String]?
     
     var description: String {
         return "market [\(self.id ?? 0), \(self.name), \(self.price_usd), \(self.price_eur)€]"
@@ -29,9 +29,6 @@ class MarketCoins {
         self.comments = comments
     }
     
-//    public func getId() -> Int{ // What the fuck!!! (de la part de Mathieu)
-//        return self.id!
-//    }
     public func getName() -> String{
         return self.name
     }
@@ -41,12 +38,6 @@ class MarketCoins {
     public func getPriceEur() -> Double{
         return self.price_eur
     }
-//    public func getImageUrl() -> URL{
-//        return self.imageUrl!
-//    }
-//    public func getComments() -> [String]{
-//        return self.comments ?? []
-//    }
 
 }
 

@@ -29,7 +29,5 @@ class MarketCompare{
     public func getPrice() -> [String: Double]{
         return self.price
     }
-//    public func getImageUrl() -> URL{
-//        return self.imageUrl!
-//    }
+
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CryptoCompareService{
+class CryptoCompareService{ //service représentant les fonctions de récupération des données des marchés de l'API CryptoCompare
     public static func createMarketCoins(jsonObject: Any, marketCoins: inout MarketCompare, parameters: [String], currencies: [String])
     {
             if let array = jsonObject as? [Any] {
@@ -30,7 +30,6 @@ class CryptoCompareService{
                             marketCoins.addPrice(currency: cur, price: price)
                             marketCoins.setSrcImage(srcImage: "https://cryptocompare.com" + imageUrl)
                         }
-                        //print(key)
                     }
                     else {
                         createMarketCoins(jsonObject: dict[key]!, marketCoins: &marketCoins, parameters: parameters, currencies: currencies)
@@ -48,14 +47,12 @@ class CryptoCompareService{
             else if let dict = jsonObject as? [String : Any] {
                 for key in dict.keys {
                     if parameters.contains(key) {
-                        //marketsCoins.append(dict[key] as! String)
                         marketsCoins.append(MarketCompare(name: key))
                         guard var lastMarket = marketsCoins.last else{
                             print("Error in creating a marketCoins")
                             return
                         }
                         createMarketCoins(jsonObject: dict[key]!, marketCoins: &lastMarket, parameters: parameters, currencies: currencies)
-                        //print(key)
                     }
                     else {
                         extractMarketsCoins(jsonObject: dict[key]!, marketsCoins: &marketsCoins, parameters: parameters, currencies: currencies)

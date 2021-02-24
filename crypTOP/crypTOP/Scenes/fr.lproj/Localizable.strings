@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  crypTOP
+
+  Created by Ludovic FAVIER on 24/02/2021.
+  
+*/
+
+"HomeViewController_Title" = "Accueil";
+
+"DetailViewController_Title" = "Détail";
+"DetailViewController_Name" = "Nom";
+"DetailViewController_Price" = "Prix";
+
+"AllCryptoViewController_Title" = "Tous les marchés";
+
+"displayErrorMessage_Title" = "Marché déjà dans favoris";
+"displayErrorMessage_Message_1" = "Le marché";
+"displayErrorMessage_Message_2" = "est déjà dans vos favoris";
+
+"addToFavorite_Title" = "Ajout dans favoris";
+"addToFavorite_Message_1" = "Voulez-vous ajouter le marché";
+"addToFavorite_Message_2" = "dans vos favoris?";
+"yes" = "Oui";
+"no" = "Non";
+
+"success_Title" = "Succès";
+"success_Message_1" = "Le Marché";
+"success_Message_2" = "est ajouté dans vos favoris!";
+
+"error_Title" = "Erreur";
+"error_Message" = "La requête n'a pas marché";
+
+
+
+
+

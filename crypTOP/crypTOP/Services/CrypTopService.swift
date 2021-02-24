@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CrypTopService{
+class CrypTopService{//service représentant toutes les fonctions CRUD de notre API server
     
     public static func dictionaryFromMarket(_ market: MarketCoins) -> [String: Any] {
         var dict: [String: Any] = [:]
@@ -48,15 +48,9 @@ class CrypTopService{
         var request = Foundation.URLRequest(url: updateMarketURL)
         request.httpMethod = "PUT"
         
-        print("in update:")
-        dump(market)
         let dict = self.dictionaryFromMarket(market)
-        print("dict")
-        print(dict)
 
         let data = try? JSONSerialization.data(withJSONObject: dict, options: .fragmentsAllowed)
-        print("data")
-        print(data as Any)
 
         request.httpBody = data
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

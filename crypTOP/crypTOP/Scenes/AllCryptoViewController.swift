@@ -20,7 +20,7 @@ class AllCryptoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "All markets"
+        self.title = NSLocalizedString("AllCryptoViewController_Title", comment: "")
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
     }
@@ -83,12 +83,13 @@ extension AllCryptoViewController: UITableViewDataSource {
 
 extension AllCryptoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let marketCompare = self.marketsCompare[indexPath.row] // recuperer le café à la bonne ligne
+        let marketCompare = self.marketsCompare[indexPath.row]
         guard let marketsCoins = self.marketsCoins else { return }
-        if marketIsAlreadyInFavoris(marketCompare: marketCompare, marketsCoins: marketsCoins){
+        if marketIsAlreadyInFavorite(marketCompare: marketCompare, marketsCoins: marketsCoins){
+            //si le marché CryptoCompare est déjà dans nos favoris, on ne l'ajoute pas et on met un message d'erreur
             displayErrorMessage(marketCompare: marketCompare)
-        }else{
-            goCreateMarketCoinsInFavoris(marketCompare: marketCompare)
+        }else{ //sinon on l'ajoute dans nos favoris
+            goCreateMarketCoinsInFavorite(marketCompare: marketCompare)
         }
     }
     
@@ -98,7 +99,7 @@ extension AllCryptoViewController: UITableViewDelegate {
         self.marketsCompare.insert(marketCompare, at: destinationIndexPath.row)
     }
     
-    func marketIsAlreadyInFavoris(marketCompare: MarketCompare, marketsCoins: [MarketCoins]) -> Bool{
+    func marketIsAlreadyInFavorite(marketCompare: MarketCompare, marketsCoins: [MarketCoins]) -> Bool{
         return (self.findMarketCoinsByMarketCompare(marketCompare: marketCompare, marketsCoins: marketsCoins) != nil)
     }
     func findMarketCoinsByMarketCompare(marketCompare: MarketCompare, marketsCoins: [MarketCoins]) -> MarketCoins?{
@@ -110,37 +111,33 @@ extension AllCryptoViewController: UITableViewDelegate {
         return nil
     }
     func displayErrorMessage(marketCompare: MarketCompare){
-        let alert = UIAlertController(title: "Market already in Favoris", message: "The market \(marketCompare.getName()) is already in your favoris", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        let alert = UIAlertController(title: NSLocalizedString("displayErrorMessage_Title", comment: ""), message: "\(NSLocalizedString("displayErrorMessage_Message_1", comment: "")) \(marketCompare.getName()) \(NSLocalizedString("displayErrorMessage_Message_2", comment: ""))", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-    func goCreateMarketCoinsInFavoris(marketCompare: MarketCompare){
-        let alert = UIAlertController(title: "Add to favoris", message: "Do you want to add the market \(marketCompare.getName()) into your favoris?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { action in
-            print("adding market \(marketCompare.getName()) ...")
+    func goCreateMarketCoinsInFavorite(marketCompare: MarketCompare){
+        let alert = UIAlertController(title: NSLocalizedString("addToFavorite_Title", comment: ""), message: "\(NSLocalizedString("addToFavorite_Message_1", comment: "")) \(marketCompare.getName()) \(NSLocalizedString("addToFavorite_Message_2", comment: ""))", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("yes", comment: ""), style: UIAlertAction.Style.default, handler: { action in
             let marketCoins = self.prepareCreateMarketCoins(marketCompare: marketCompare)
             CrypTopService.create(market: marketCoins){ (success) in
                 DispatchQueue.main.sync {
                     if(success) {
-                        let alert = UIAlertController(title: "Success", message: "Market \(marketCoins.getName()) is added in your favoris!", preferredStyle: .alert)
+                        let alert = UIAlertController(title: NSLocalizedString("success_Title", comment: ""), message: "\(NSLocalizedString("success_Message_1", comment: "")) \(marketCoins.getName()) \(NSLocalizedString("success_Message_2", comment: ""))", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { action in
                             self.navigationController?.popViewController(animated: true)
                         }))
                         self.present(alert, animated: true, completion: nil)
                     } else {
-                        let alert = UIAlertController(title: "Error", message: "request did not worked", preferredStyle: .alert)
+                        let alert = UIAlertController(title: NSLocalizedString("error_Title", comment: ""), message: NSLocalizedString("error_Message", comment: ""), preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     }
                 }
             }
         }))
-        alert.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("no", comment: ""), style: UIAlertAction.Style.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
         
-    }
-    func prepareUpdateMarketCoins(marketCompare: MarketCompare, marketCoins: MarketCoins) -> MarketCoins{
-        return MarketCoins(id: marketCoins.id, name: marketCoins.getName(), price_usd: marketCompare.getPrice()["USD"]!, price_eur: marketCompare.getPrice()["EUR"]!, imageURL: marketCompare.imageUrl, comments: marketCoins.comments)
     }
     func prepareCreateMarketCoins(marketCompare: MarketCompare) -> MarketCoins{
         return MarketCoins(id: nil, name: marketCompare.getName(), price_usd: marketCompare.getPrice()["USD"]!, price_eur: marketCompare.getPrice()["EUR"]!, imageURL: marketCompare.imageUrl, comments: [])

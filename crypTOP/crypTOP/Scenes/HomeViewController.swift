@@ -9,9 +9,9 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    public var markets: [MarketCoins] = []
-    public var marketsCompare: [MarketCompare] = []
-    @IBOutlet var tableCrypto: UITableView!
+    public var markets: [MarketCoins] = [] //nos marchés favoris dont les données sont stockées dans notre API server
+    public var marketsCompare: [MarketCompare] = [] //les marchés dont les données sont stockés dans l'API CryptoCompare
+    @IBOutlet var tableCrypto: UITableView! //liste de nos marchés favoris
     @IBOutlet var marketButton: UIButton!
     
     
@@ -24,7 +24,7 @@ class HomeViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Home"
+        self.title = NSLocalizedString("HomeViewController_Title", comment: "")
         
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
@@ -35,14 +35,12 @@ class HomeViewController: UIViewController {
         self.navigationController?.pushViewController(controller, animated: true)
         
     }
-    //appel de l'url request pour récupérer les données des marchés de l'api CryptoCompare
+    //appel des urls request pour récupérer d'abord les données des marchés de notre API server et ensuite de l'API CryptoCompare
     public func initMarkets() -> Void{
         let urlString = "https://api-cryptop.herokuapp.com/MarketsCoins/"
         CrypTopService.URLRequest(urlString: urlString,completion:{ marketCoins in
             DispatchQueue.main.async {
                 self.markets = marketCoins
-                dump(self.markets)
-                
                 let fsyms = "BTC,ETH,DOGE,XRP,XLM,LTC,ADA,DOT,LINK,EOS,BCH"
                 let tsyms = "USD,EUR"
                 let apiKey = "8cf7e8afc81e05ac24dff8fde7c369a53cfb6820fd77245245dffb9762fd9c90"
@@ -123,9 +121,7 @@ extension HomeViewController: UITableViewDelegate {
             }
         }
     }
-    func prepareUpdateMarketCoins(marketCompare: MarketCompare, marketCoins: MarketCoins) -> MarketCoins{
-        return MarketCoins(id: marketCoins.id, name: marketCoins.getName(), price_usd: marketCompare.getPrice()["USD"]!, price_eur: marketCompare.getPrice()["EUR"]!, imageURL: marketCompare.imageUrl, comments: marketCoins.comments)
-    }
+    //trouver le marché du CryptoCompare qui correspond à notre marché favoris
     func findMarketCompareByMarketCoins(marketsCompare: [MarketCompare], marketCoins: MarketCoins) -> MarketCompare?{
         for marketCompare in marketsCompare {
             if marketCompare.getName() == marketCoins.getName(){
@@ -134,8 +130,8 @@ extension HomeViewController: UITableViewDelegate {
         }
         return nil
     }
+    //en cliquant sur un marché de la liste des favoris, on va automatiquement update les données du marché de notre API server sélectionné en utilisant les données du marché de l'API CrytoCompare
     func updateMarketCoin(marketCompare: MarketCompare, marketCoins: MarketCoins){
-            print("updating market \(marketCompare.getName()) ...")
             let market = self.prepareUpdateMarketCoins(marketCompare: marketCompare, marketCoins: marketCoins)
 
             CrypTopService.update(id: market.id!, market: market){ (success) in
@@ -149,6 +145,10 @@ extension HomeViewController: UITableViewDelegate {
                     }
                 }
             }
+    }
+
+    func prepareUpdateMarketCoins(marketCompare: MarketCompare, marketCoins: MarketCoins) -> MarketCoins{
+        return MarketCoins(id: marketCoins.id, name: marketCoins.getName(), price_usd: marketCompare.getPrice()["USD"]!, price_eur: marketCompare.getPrice()["EUR"]!, imageURL: marketCompare.imageUrl, comments: marketCoins.comments)
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MarketCompare{
+class MarketCompare{ //classe représentant un marché de l'API CryptoCompare
     private var name: String //FROMSYMBOL
     private var price: [String: Double] = [:] //TOSYMBOL + PRICE
     var imageUrl: URL? //IMAGEURL

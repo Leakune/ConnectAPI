@@ -26,9 +26,7 @@ class DetailViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        print("In Detail")
-        dump(self.market)
-        self.title = "Detail"
+        self.title = NSLocalizedString("DetailViewController_Title", comment: "")
         if let data = NSData(contentsOf: self.market.imageUrl!)
         {
             self.icon.image = UIImage(data: data as Data)

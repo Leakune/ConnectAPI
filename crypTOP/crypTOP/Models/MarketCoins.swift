@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MarketCoins {
+class MarketCoins {//classe représentant un marché favoris de notre API server
     
     var id: Int?
     private var name: String
